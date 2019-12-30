@@ -70,7 +70,7 @@ done
 
 if [ -z "$DISTRO" ]; then
     if [ -z "$FSLDISTRO" ]; then
-        FSLDISTRO='fsl-imx-xwayland'
+        FSLDISTRO='fsl-imx-wayland'
     fi
 else
     FSLDISTRO="$DISTRO"
@@ -89,7 +89,7 @@ fi
 
 if [ -z "$MACHINE" ]; then
     echo setting to default machine
-    MACHINE='imx6qpsabresd'
+    MACHINE='imx6dlkenttablet'
 fi
 
 # copy new EULA into community so setup uses latest i.MX EULA
@@ -130,6 +130,10 @@ fi
 META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-bsp"
 
 echo "" >> $BUILD_DIR/conf/bblayers.conf
+echo "# kentkart Release layers" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-kentkart \"" >> $BUILD_DIR/conf/bblayers.conf
+
+echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "# i.MX Yocto Project Release layers" >> $BUILD_DIR/conf/bblayers.conf
 hook_in_layer meta-fsl-bsp-release/imx/meta-bsp
 hook_in_layer meta-fsl-bsp-release/imx/meta-sdk
@@ -142,7 +146,7 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-python \"" >> $BU
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-filesystems \"" >> $BUILD_DIR/conf/bblayers.conf
 
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-kentkart \"" >> $BUILD_DIR/conf/bblayers.conf
+
 
 echo BSPDIR=$BSPDIR
 echo BUILD_DIR=$BUILD_DIR
@@ -154,6 +158,8 @@ if [ -d ../sources/meta-freescale ]; then
     sed -e "s,meta-fsl-arm\s,meta-freescale ,g" -i conf/bblayers.conf
     sed -e "s,\$.BSPDIR./sources/meta-fsl-arm-extra\s,,g" -i conf/bblayers.conf
 fi
+
+. ../sources/meta-kentkart/setup-services.sh
 
 cd  $BUILD_DIR
 clean_up

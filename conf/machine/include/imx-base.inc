@@ -246,3 +246,11 @@ MACHINE_FEATURES_append_mx8qm = " xen"
 
 # Add the ability to specify _imx machines
 MACHINEOVERRIDES =. "imx:"
+
+#Definition of the bbclasses file
+IMAGE_CLASSES += "image_types_kk"
+
+#For 8GB sd card
+IMAGE_ROOTFS_SIZE="7350000"
+
+
