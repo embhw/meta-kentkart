@@ -250,7 +250,7 @@ MACHINEOVERRIDES =. "imx:"
 #Definition of the bbclasses file
 IMAGE_CLASSES += "image_types_kk"
 
-#For 8GB sd card
+#For 8GB MMC
 IMAGE_ROOTFS_SIZE="7350000"
 
 
